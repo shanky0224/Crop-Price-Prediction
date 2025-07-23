@@ -1,5 +1,4 @@
 # app.py
-# this one
 
 from flask import Flask, request, jsonify, render_template
 import pickle
@@ -34,104 +33,6 @@ with open(state_encoder_path, 'rb') as file:
 with open(scaler_path, 'rb') as file:
     scaler = pickle.load(file)
 
-'''valid_crop_locations = {
-    "paddy":{
-        "Andhra Pradesh" : ["Nellore", "Parvatipuram"],
-        "Bihar" : ["Sasaram", "Gulabbagh"],
-        "Gujarat" : ["Bavla"],
-        "Haryana" : ["Ambala"],
-        "Kerala" : ["Tattamangalam", "Palakkad", "Pullinkunnu"],
-        "Karnataka" : ["Mysore"],
-        "Maharashtra" : ["Gondia", "Kolhapur"],
-        "Punjab" : ["Amritsar"],
-        "Tamilnadu" : ["Kanchipuram"],
-        "Uttarpradesh" : ["Pilibhit"],
-        "West Bengal" : ["Ahmadpur", "Bolepur"]
-    },
-    "wheat":{
-        "Telangana" : ["Hyderabad"],
-        "Andhra Pradesh" : ["Kurnool"],
-        "Bihar" : ["Patna", "Sasaram"],
-        "Gujarat" : ["Dessa", "Rajkot", "Bhuj", "Patan"],
-        "Haryana" : ["Ambala", "Hissar"],
-        "Jammu & Kashmir" : ["Baramulla", "Udhampur"],
-        "Karnataka" : ["Bengaluru", "Bijapur"],
-        "Madhyapradesh" : ["Harda", "Tikamgarh"],
-        "Maharashtra" : ["Jalna", "Pachora"],
-        "Delhi" : ["Delhi"],
-        "Odisha" : ["Bhubaneswar"],
-        "Punjab" : ["Amritsar"],
-        "Rajasthan" : ["Jaipur", "Udaipur"],
-        "Tamilnadu" : ["Chennai"],
-        "Uttarpradesh" : ["Agra", "Kanpur"],
-        "West Bengal" : ["Asansol", "Indus"],
-    },
-    "barley":{
-        "Bihar" : ["Muzaffarpur"],
-        "Madhyapradesh" : ["Bhopal"],
-        "Haryana" : ["Hissar"],
-        "Rajasthan" : ["Alwar", "Bhilwara"],
-        "Uttarpradesh" : ["Gorakhpur", "Hapur", "Kanpur"],
-        "Delhi" : ["Delhi"],
-    },
-    "potato":{
-        "Telangana" : ["Hyderabad"],
-        "Assam" : ["Guwahati"], 
-        "Bihar" : ["Patna"],
-        "Haryana" : ["Hissar", "Karnal"],
-        "Himachalpradesh" : ["Shimla"],
-        "Karnataka" : ["Bengaluru"],
-        "Maharashtra" : ["Mambai", "Nagpur"],
-        "Punjab" : ["Hoshiarpur"],
-    },
-    "onion":{
-        "Andhra Pradesh" : ["Cuddapah"],
-        "Telangana" : ["Hyderabad"],
-        "Assam" : ["Guwahati"],
-        "Bihar" : ["Patna"],
-        "Haryana" : ["Karnal"],
-        "Jammu & Kashmir" : ["Udhampur"],
-        "Karnataka" : ["Mysore"],
-        "Kerala" : ["Alleppey", "Kozhikode"],
-        "Maharashtra" : ["Mumbai"],
-        "Tamilnadu" : ["Chennai", "Dindigul"],
-        "Uttarpradesh" : ["Kanpur", "Lucknow"],
-        "West Bengal" : ["Kolkata"],
-    },
-    "apple":{
-        "Maharashtra" : ["Mumbai"],
-        "Tamilnadu" : ["Chennai"],
-        "Uttarpradesh" : ["Lucknow"],
-        "Delhi" : ["Delhi"],
-    },
-    "orange":{
-        "Maharashtra" : ["Nagpur"],
-        "Tamilnadu" : ["Chennai"],
-        "Uttarpradesh" : ["Kanpur"],
-        "West Bengal" : ["Kolkata"],
-        "Delhi" : ["Delhi"],
-    },
-    "banana":{
-        "Andhra Pradesh" : ["Rajahmundry"],
-        "Maharashtra" : ["Jalgao"],
-        "Tamilnadu" : ["Vellore"],
-        "Uttarpradesh" : "Kanpur",
-        "West Bengal" : ["Kolkata"]
-    },
-    "coconut":{
-        "Andhra Pradesh" : ["Rajahmundry"],
-        "Karnataka" : ["Manglore"],
-        "Kerala" : ["Kozhikode"],
-        "West Bengal" : ["Kolkata"],
-        "Goa" : ["Mapusa"],
-    },
-    "almond":{
-        "Jammu & Kashmir" : ["Jammu"],
-        "Maharashtra" : ["Mumbai"],
-        "Uttarpradesh" : ["Kanpur"],
-        "Delhi" : ["Delhi"]
-    }
-}'''
 
 @app.route('/')
 def index():
@@ -151,12 +52,6 @@ def predict():
         state = data.get('state')
         
         print("Extracted Data:", year, crop, month, city, state)
-
-        '''# Validate the crop location
-        if not validate_crop_location(crop, state, city):
-            error_message = f'{crop.capitalize()} is not grown in {city}, {state}. Please enter a valid location.'
-            logging.error(error_message)
-            return jsonify({'error': error_message}), 400'''
 
         # Encode input values
         year_encoded = int(year)
@@ -184,21 +79,6 @@ def predict():
         print("Error during prediction:", str(e))
         return jsonify({'error': str(e)})
 
-'''def validate_crop_location(crop, state, city):
-    """Check if the crop is grown in the specified state and city."""
-    crop = crop.lower()
-    state = state.capitalize()
-    city = city.capitalize()
-
-    logging.debug(f"Validating location: crop={crop}, state={state}, city={city}")
-    
-    if crop in valid_crop_locations:
-        if state in valid_crop_locations[crop]:
-            if city in valid_crop_locations[crop][state]:
-                logging.debug(f"Location validation passed for {crop} in {city}, {state}")
-                return True
-    logging.debug(f"Location validation failed for {crop} in {city}, {state}")
-    return False'''
 
 def encode_input(value, encoder, name):
     """Encodes the input value using the provided encoder, returns -1 if value is invalid."""
