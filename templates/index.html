@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Price Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Crop Price Prediction</h1>
+        <form id="predictionForm">
+            <div class="form-group">
+                <label for="crop">Select Crop:</label>
+                <select id="crop" name="crop">
+                    <option value="paddy">Paddy</option>
+                    <option value="wheat">Wheat</option>
+                    <option value="barley">Barley</option>
+                    <option value="potato">Potato</option>
+                    <option value="onion">Onion</option>
+                    <option value="apple">Apple</option>
+                    <option value="orange">Orange</option>
+                    <option value="banana">Banana</option>
+                    <option value="coconut">Coconut</option>
+                    <option value="almond">Almond</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="month">Enter Month:</label>
+                <input type="text" id="month" name="month" placeholder="e.g., January" required>
+            </div>
+
+            <div class="form-group">
+                <label for="state">Enter State:</label>
+                <input type="text" id="state" name="state" placeholder="e.g., Maharashtra" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">Enter City:</label>
+                <input type="text" id="city" name="city" placeholder="e.g., Delhi" required>
+            </div>
+
+            <div class="form-group">
+                <label for="year">Enter Year:</label>
+                <input type="number" id="year" name="year" placeholder="e.g., 2023" required>
+            </div>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
